@@ -47,7 +47,7 @@ class PreventSessionHijacking
             } else {
                 $savedFingerprint = $session->get('_optiguard_fingerprint');
 
-                // 3. Terdeteksi request datang dari browser / device / IP berbeda!
+                // 3. TERDETEKSI COOKIE DI-COPY KE PERANGKAT/BROWSER LAIN!
                 if ($savedFingerprint !== $currentFingerprint) {
                     $originalIp = $session->get('_optiguard_ip');
                     $originalUa = $session->get('_optiguard_ua');
@@ -67,24 +67,25 @@ class PreventSessionHijacking
                     $session->invalidate();
                     $session->regenerateToken();
 
-                    $alertMessage = config('optiguard.anti_hijacking.flash_message', 'Sesi login Anda telah dibatalkan otomatis oleh sistem keamanan karena terdeteksi upaya duplikasi cookie / perpindahan perangkat (Anti-Hijacking Protocol).');
-                    $redirectRoute = config('optiguard.anti_hijacking.redirect_route', 'login');
+                    $title = 'Upaya Kloning Cookie Terdeteksi';
+                    $message = config('optiguard.anti_hijacking.flash_message', 'Sesi login Anda telah dibatalkan otomatis oleh sistem keamanan karena terdeteksi upaya penggunaan cookie pada perangkat atau browser yang berbeda (Anti-Hijacking Protocol).');
+                    $buttonUrl = route(config('optiguard.anti_hijacking.redirect_route', 'login'));
 
-                    $session->flash('error', $alertMessage);
-                    $session->save();
-
-                    // Tangani request Inertia SPA
-                    if ($request->header('X-Inertia') && class_exists(\Inertia\Inertia::class)) {
-                        return \Inertia\Inertia::location(route($redirectRoute));
-                    }
-
+                    // Tangani request JSON / API
                     if ($request->expectsJson()) {
                         return response()->json([
-                            'message' => 'Sesi tidak valid. Terdeteksi upaya perpindahan cookie antar-perangkat.'
-                        ], 401);
+                            'message' => $message,
+                            'action' => 'lockscreen',
+                        ], 403);
                     }
 
-                    return redirect()->route($redirectRoute)->with('error', $alertMessage);
+                    // TAMPILKAN HALAMAN PENUH OPTIGUARD LOCK SCREEN
+                    return response()->view('optiguard::lockscreen', [
+                        'title' => $title,
+                        'message' => $message,
+                        'buttonUrl' => $buttonUrl,
+                        'buttonText' => 'Kembali ke Halaman Login',
+                    ], 403);
                 }
             }
         }

@@ -27,12 +27,14 @@ class OptiGuardServiceProvider extends ServiceProvider
      */
     public function boot(Router $router, Kernel $kernel): void
     {
-        // 1. Publish Configuration
+        // 1. Publish Configuration & Views
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/optiguard.php' => config_path('optiguard.php'),
             ], 'optiguard-config');
         }
+
+        $this->loadViewsFrom(__DIR__ . '/Views', 'optiguard');
 
         // 2. Register Middleware Aliases
         $router->aliasMiddleware('optiguard.hijack', PreventSessionHijacking::class);
