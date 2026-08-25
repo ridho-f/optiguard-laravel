@@ -212,7 +212,7 @@ $realIp = DeviceFingerprint::resolveClientIp($request);
 Middleware proteksi zero-trust yang memeriksa integritas sesi login pada setiap request.
 
 * **Alias Router**: `optiguard.hijack`
-* **Perilaku**: Jika fingerprint request tidak cocok dengan fingerprint saat sesi dibuat, server langsung membatalkan sesi (`Auth::logout()`), membuang token sesi, dan me-redirect ke login dengan hard-reload (kompatibel dengan Inertia.js).
+* **Perilaku**: Jika fingerprint request tidak cocok dengan fingerprint saat sesi dibuat, server langsung membatalkan sesi (`Auth::logout()`), membuang token sesi, dan menampilkan **Halaman Penuh OptiGuard Lock Screen** (`optiguard::lockscreen` / HTTP 403) atau JSON 403 pada request API. Kompatibel penuh dengan client interceptor Inertia.js.
 
 ---
 
