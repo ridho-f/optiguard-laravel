@@ -18,6 +18,7 @@
   - [Laravel 10](#laravel-10-apphttpkernelphp)
 - [Konfigurasi Lengkap (`config/optiguard.php`)](#-konfigurasi-lengkap)
 - [Integrasi Full-Stack dengan OptiGuard Frontend](#-integrasi-full-stack-dengan-frontend)
+- [Dokumentasi API Telemetry (`docs/API.md`)](docs/API.md)
 - [Penjelasan Fitur Keamanan](#-penjelasan-fitur-keamanan)
   - [1. Anti-Session Hijacking & Cookie Theft](#1-anti-session-hijacking--cookie-theft)
   - [2. HTTP Security Headers](#2-http-security-headers)
