@@ -146,7 +146,7 @@
 <body>
     <div class="bg-ambient"></div>
     <div class="card">
-        <img src="{{ \OptiGuard\Laravel\Helpers\Logo::get() }}" alt="OptiGuard Logo" class="optiguard-logo" />
+        <img src="{{ asset('images/OptiGuard.png') }}" alt="OptiGuard Logo" class="optiguard-logo" onerror="this.onerror=null; this.src='https://cdn.appdutamall.com/bucket-cctv/cctv-thumbnails/logo_optigate.webp';" />
 
         <div class="shield-box">
             <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fb7185" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
