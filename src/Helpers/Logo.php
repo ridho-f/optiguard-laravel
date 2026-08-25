@@ -6,6 +6,7 @@ class Logo
 {
     /**
      * Return high-resolution embedded Base64 data URI of the OptiGuard Logo.
+     * Zero-dependency: Works in any Laravel project without local image files.
      */
     public static function get(): string
     {
