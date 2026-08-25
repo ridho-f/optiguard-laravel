@@ -146,22 +146,7 @@
 <body>
     <div class="bg-ambient"></div>
     <div class="card">
-        @if(!empty($logoUrl))
-            <img src="{{ $logoUrl }}" alt="OptiGuard Logo" class="optiguard-logo" onerror="this.style.display='none'" />
-        @else
-            <svg class="optiguard-logo" viewBox="0 0 260 52" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 42px; width: auto; margin: 0 auto 20px; display: block;">
-                <g transform="translate(4, 2)">
-                    <circle cx="24" cy="24" r="23" stroke="#60a5fa" stroke-width="2" opacity="0.35"/>
-                    <path d="M7 24h34M24 7v34M13 12a23 23 0 0 0 0 24M35 12a23 23 0 0 1 0 24" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" opacity="0.8"/>
-                    <rect x="14" y="14" width="8" height="8" rx="2" fill="#38bdf8"/>
-                    <rect x="26" y="14" width="8" height="8" rx="2" fill="#818cf8"/>
-                    <rect x="14" y="26" width="8" height="8" rx="2" fill="#6366f1"/>
-                    <rect x="26" y="26" width="8" height="8" rx="2" fill="#a855f7"/>
-                </g>
-                <text x="64" y="29" font-family="'Figtree', system-ui, sans-serif" font-size="25" font-weight="800" fill="#ffffff" letter-spacing="-0.5">Opti<tspan fill="#38bdf8">Guard</tspan></text>
-                <text x="65" y="44" font-family="'Figtree', system-ui, sans-serif" font-size="8.5" font-weight="700" fill="#94a3b8" letter-spacing="2.2">SECURITY PROTOCOL</text>
-            </svg>
-        @endif
+        <img src="{{ $logoUrl ?? \OptiGuard\Laravel\Helpers\Logo::get() }}" alt="OptiGuard Logo" class="optiguard-logo" />
 
         <div class="shield-box">
             <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fb7185" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
